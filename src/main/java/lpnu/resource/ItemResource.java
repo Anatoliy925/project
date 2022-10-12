@@ -1,7 +1,7 @@
 package lpnu.resource;
 
-import lpnu.dto.UserDTO;
-import lpnu.service.UserService;
+import lpnu.dto.ItemDTO;
+import lpnu.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,47 +9,45 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/user")
-public class UserResource {
+@RequestMapping("/api/v1/item")
+public class ItemResource {
 
     @Autowired
-    private UserService userService;
+    private ItemService itemService;
 
     @GetMapping
-    public List<UserDTO> getAllUsers() {
-        System.out.println(userService.getAllUsers());
-        return userService.getAllUsers();
+    public List<ItemDTO> getAllItems() {
+        System.out.println(itemService.getAllItems());
+        return itemService.getAllItems();
     }
 
     @GetMapping("/{id}")
-    public UserDTO findById(@PathVariable Long id) {
-        System.out.println(userService.findById(id));
-        return userService.findById(id);
+    public ItemDTO findById(@PathVariable Long id) {
+        System.out.println(itemService.findById(id));
+        return itemService.findById(id);
     }
 
     @PostMapping
-    public UserDTO createUser(@RequestBody UserDTO userDTO) {
-        UserDTO createdUser = userService.create(userDTO);
+    public ItemDTO createItem(@RequestBody ItemDTO itemDTO) {
+        ItemDTO createdItem = itemService.create(itemDTO);
 
-        System.out.println(createdUser);
-        return createdUser;
+        System.out.println(createdItem);
+        return createdItem;
     }
 
 
     @PutMapping
-    public UserDTO updateUser(@RequestBody UserDTO userDTO) {
-        UserDTO updateduUser = userService.update(userDTO);
+    public ItemDTO updateItem(@RequestBody ItemDTO itemDTO) {
+        ItemDTO updatedItem = itemService.update(itemDTO);
 
-        System.out.println(updateduUser);
-        return updateduUser;
+        System.out.println(updatedItem);
+        return updatedItem;
     }
 
 
-
-    // api/v1/user/7
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable Long id) {
-        userService.delete(id);
+        itemService.delete(id);
         return ResponseEntity.ok().build();
     }
 }
@@ -71,7 +69,7 @@ Postman
 
     400 - Bad request   - юзер прислав погані дані
     401 - Unauthorized  - не залогінилися але хоче щось зробити
-    403 - Forbidden     - Юзер залогінився, але не має права нічого робити
+    403 - Forbidden     - не залогінилися але хоче щось зробити. Але навіть якщо залогінитеся то не маєте права нічого робити
     404 - page not found / resource not found
 
 

@@ -53,16 +53,4 @@ public class UserServiceImpl implements UserService {
     public UserDTO findById(Long id) {
         return UserMapper.toDTO(userRepository.findById(id));
     }
-
-    public static void main(String[] args) {
-        Map<Integer, Integer> q = new HashMap<>();
-
-        q.put(1,1);
-        q.put(null,2);
-        q.put(null,3);
-        q.put(4,1);
-        q.put(1,1);
-
-        System.out.println(q);
-    }
 }
