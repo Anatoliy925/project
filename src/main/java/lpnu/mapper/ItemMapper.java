@@ -12,6 +12,7 @@ public class ItemMapper {
         itemDTO.setName(item.getName());
         itemDTO.setPrice(item.getPrice());
         itemDTO.setAvailable(item.getAvailable());
+        itemDTO.setStatus(item.getStatus());
 
         return itemDTO;
     }
@@ -23,6 +24,7 @@ public class ItemMapper {
         item.setName(itemDTO.getName());
         item.setPrice(itemDTO.getPrice());
         item.setAvailable(itemDTO.getAvailable());
+        item.setStatus(itemDTO.getStatus());
 
         return item;
     }

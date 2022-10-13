@@ -12,6 +12,8 @@ public class UserMapper {
         userDTO.setSurname(user.getSurname());
         userDTO.setEmail(user.getEmail());
         userDTO.setBirthday(user.getBirthday());
+        userDTO.setStatus(user.getStatus());
+        userDTO.setRole(user.getRole());
 
         return userDTO;
     }
@@ -24,6 +26,8 @@ public class UserMapper {
         user.setSurname(userDTO.getSurname());
         user.setEmail(userDTO.getEmail());
         user.setBirthday(userDTO.getBirthday());
+        user.setStatus(userDTO.getStatus());
+        user.setRole(userDTO.getRole());
 
         return user;
     }

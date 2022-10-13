@@ -4,6 +4,7 @@ import lpnu.dto.ItemDTO;
 import lpnu.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,31 +18,23 @@ public class ItemResource {
 
     @GetMapping
     public List<ItemDTO> getAllItems() {
-        System.out.println(itemService.getAllItems());
         return itemService.getAllItems();
     }
 
     @GetMapping("/{id}")
     public ItemDTO findById(@PathVariable Long id) {
-        System.out.println(itemService.findById(id));
         return itemService.findById(id);
     }
 
     @PostMapping
-    public ItemDTO createItem(@RequestBody ItemDTO itemDTO) {
-        ItemDTO createdItem = itemService.create(itemDTO);
-
-        System.out.println(createdItem);
-        return createdItem;
+    public ItemDTO createItem(@RequestBody @Validated ItemDTO itemDTO) {
+        return itemService.create(itemDTO);
     }
 
 
     @PutMapping
-    public ItemDTO updateItem(@RequestBody ItemDTO itemDTO) {
-        ItemDTO updatedItem = itemService.update(itemDTO);
-
-        System.out.println(updatedItem);
-        return updatedItem;
+    public ItemDTO updateItem(@RequestBody @Validated ItemDTO itemDTO) {
+        return itemService.update(itemDTO);
     }
 
 

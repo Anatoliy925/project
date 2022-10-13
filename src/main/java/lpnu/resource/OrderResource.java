@@ -1,7 +1,7 @@
 package lpnu.resource;
 
-import lpnu.dto.UserDTO;
-import lpnu.service.UserService;
+import lpnu.dto.OrderDTO;
+import lpnu.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -10,35 +10,37 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/user")
-public class UserResource {
+@RequestMapping("/api/v1/order")
+public class OrderResource {
 
     @Autowired
-    private UserService userService;
+    private OrderService orderService;
 
     @GetMapping
-    public List<UserDTO> getAllUsers() {
-        return userService.getAllUsers();
+    public List<OrderDTO> getAllOrders() {
+        return orderService.getAllOrders();
     }
 
     @GetMapping("/{id}")
-    public UserDTO findById(@PathVariable Long id) {
-        return userService.findById(id);
+    public OrderDTO findById(@PathVariable Long id) {
+        return orderService.findById(id);
     }
 
     @PostMapping
-    public UserDTO createUser(@RequestBody @Validated UserDTO userDTO) {
-        return userService.create(userDTO);
+    public OrderDTO createOrder(@RequestBody @Validated OrderDTO orderDTO) {
+        return orderService.create(orderDTO);
     }
 
+
     @PutMapping
-    public UserDTO updateUser(@RequestBody UserDTO userDTO) {
-        return userService.update(userDTO);
+    public OrderDTO updateOrder(@RequestBody @Validated OrderDTO orderDTO) {
+        return orderService.update(orderDTO);
     }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable Long id) {
-        userService.delete(id);
+        orderService.delete(id);
         return ResponseEntity.ok().build();
     }
 }
@@ -60,7 +62,7 @@ Postman
 
     400 - Bad request   - юзер прислав погані дані
     401 - Unauthorized  - не залогінилися але хоче щось зробити
-    403 - Forbidden     - Юзер залогінився, але не має права нічого робити
+    403 - Forbidden     - не залогінилися але хоче щось зробити. Але навіть якщо залогінитеся то не маєте права нічого робити
     404 - page not found / resource not found
 
 

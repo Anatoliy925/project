@@ -2,15 +2,14 @@ package lpnu.service.impl;
 
 import lpnu.dto.UserDTO;
 import lpnu.entity.User;
+import lpnu.entity.enumeration.Status;
 import lpnu.mapper.UserMapper;
 import lpnu.repository.UserRepository;
 import lpnu.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -28,8 +27,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDTO create(UserDTO userDTO) {
-        User user = UserMapper.toEntity(userDTO);
 
+        User user = UserMapper.toEntity(userDTO);
+        user.setStatus(Status.ACTIVE);
         userRepository.save(user);
 
         return UserMapper.toDTO(user);
