@@ -32,11 +32,11 @@ public class OrderResource {
     }
 
 
-    @PutMapping
-    public OrderDTO updateOrder(@RequestBody @Validated OrderDTO orderDTO) {
-        return orderService.update(orderDTO);
-    }
-
+//    @PutMapping
+//    public OrderDTO updateOrder(@RequestBody @Validated OrderDTO orderDTO) {
+//        return orderService.update(orderDTO);
+//    }
+//
 
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable Long id) {

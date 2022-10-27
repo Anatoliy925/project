@@ -43,6 +43,7 @@ public class OrderRepository {
 
         saved.setUser(item.getUser());
         saved.setOrderDetails(item.getOrderDetails());
+        saved.setOrderStatus(item.getOrderStatus());
         saved.setOrderDateTime(item.getOrderDateTime());
 
         return saved;

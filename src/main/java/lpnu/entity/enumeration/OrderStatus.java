@@ -15,4 +15,7 @@ public enum OrderStatus {
         PENDING - чекає на перевірку менеджером
         CLOSED - оплачене замовлення, неможна ніяк міняти
         CANCELED - скасоване замовлення, неможна ніяк міняти
+
+
+        State Machine -
  */
