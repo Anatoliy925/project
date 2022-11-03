@@ -1,5 +1,6 @@
 package lpnu.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,6 +17,7 @@ public class User {
     private String name;
     private String surname;
     private String email;
+    @JsonIgnore
     private LocalDate birthday;
     private Status status;
     private UserRole role;

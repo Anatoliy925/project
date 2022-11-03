@@ -1,5 +1,6 @@
 package lpnu.service.impl;
 
+import lpnu.dto.AddItemToOrderDTO;
 import lpnu.dto.OrderDTO;
 import lpnu.entity.Item;
 import lpnu.entity.Order;
@@ -19,6 +20,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -47,6 +49,7 @@ public class OrderServiceImpl implements OrderService {
 
         order.setOrderDateTime(null);
         order.setOrderStatus(OrderStatus.OPEN);
+        order.setOrderDetails(new ArrayList<>());
 
         orderRepository.save(order);
 
@@ -104,17 +107,18 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void addItemToOrder(Long orderId, Long itemId, int amount) {
-        Order order = orderRepository.findById(orderId);
+    public void addItemToOrder(AddItemToOrderDTO addDTO) {
+
+        Order order = orderRepository.findById(addDTO.getOrderId());
 
         if (order.getOrderStatus() != OrderStatus.OPEN) {
             throw new ServiceException(HttpStatus.BAD_REQUEST.value(), "Order can't be changed. Order id: " + order.getId());
         }
 
-        Item item = itemRepository.findById(itemId);
+        Item item = itemRepository.findById(addDTO.getItemId());
 
 
-        //todo: check !!!
+
         boolean isItemInOrder = order.getOrderDetails().stream()
                 .map(OrderDetails::getItem)
                 .anyMatch(e -> e.equals(item));
@@ -124,12 +128,12 @@ public class OrderServiceImpl implements OrderService {
                     .filter(e -> e.getItem().equals(item))
                     .findFirst().get();
 
-            savedOrderDetails.setAmount(savedOrderDetails.getAmount() + amount);
+            savedOrderDetails.setAmount(savedOrderDetails.getAmount() + addDTO.getAmount());
 
             orderRepository.update(order);
 
         } else {
-            OrderDetails orderDetails = new OrderDetails(item, amount);
+            OrderDetails orderDetails = new OrderDetails(item, addDTO.getAmount());
             order.getOrderDetails().add(orderDetails);
 
             orderRepository.update(order);

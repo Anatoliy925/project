@@ -1,6 +1,7 @@
 package lpnu.service;
 
 
+import lpnu.dto.AddItemToOrderDTO;
 import lpnu.dto.OrderDTO;
 
 import java.util.List;
@@ -16,7 +17,7 @@ public interface OrderService {
     void closeOrder(Long orderId);
     void pendingOrder(Long orderId);
 
-    void addItemToOrder(Long orderId, Long itemId, int amount);
+    void addItemToOrder(AddItemToOrderDTO addDTO);
     //todo
 
     /*

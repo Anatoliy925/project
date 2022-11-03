@@ -1,5 +1,6 @@
 package lpnu.resource;
 
+import lpnu.dto.AddItemToOrderDTO;
 import lpnu.dto.OrderDTO;
 import lpnu.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,11 @@ public class OrderResource {
     @PostMapping
     public OrderDTO createOrder(@RequestBody @Validated OrderDTO orderDTO) {
         return orderService.create(orderDTO);
+    }
+
+    @PostMapping("/add-item")
+    public void addItemToOrder(@RequestBody @Validated AddItemToOrderDTO addDTO) {
+        orderService.addItemToOrder(addDTO);
     }
 
 
