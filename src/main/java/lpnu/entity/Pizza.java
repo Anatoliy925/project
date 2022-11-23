@@ -12,7 +12,7 @@ import java.util.Objects;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Item {
+public class Pizza {
     private Long id;
     private String name;
     private BigDecimal price;
@@ -23,8 +23,8 @@ public class Item {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Item item = (Item) o;
-        return Objects.equals(name, item.name) && Objects.equals(price, item.price);
+        Pizza pizza = (Pizza) o;
+        return Objects.equals(name, pizza.name) && Objects.equals(price, pizza.price);
     }
 
     @Override

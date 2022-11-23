@@ -1,7 +1,7 @@
 package lpnu.repository;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import lpnu.entity.Item;
+import lpnu.entity.Pizza;
 import lpnu.util.JacksonUtil;
 import org.springframework.stereotype.Repository;
 
@@ -16,77 +16,77 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Repository
-public class ItemRepository {
-    private List<Item> items;
+public class PizzaRepository {
+    private List<Pizza> pizzas;
     private Long id = 0L;
 
     @PostConstruct
     public void init(){
 
-        final Path file = Paths.get("items.txt");
+        final Path file = Paths.get("pizzas.txt");
         try {
             final String savedItemsAsString = Files.readString(file, StandardCharsets.UTF_16);
-            items = JacksonUtil.deserialize(savedItemsAsString, new TypeReference<List<Item>>() {});
+            pizzas = JacksonUtil.deserialize(savedItemsAsString, new TypeReference<List<Pizza>>() {});
 
-            if (items == null) {
-                items = new ArrayList<>();
+            if (pizzas == null) {
+                pizzas = new ArrayList<>();
                 return;
             }
 
-            final long maxId = items.stream().mapToLong(Item::getId).max().orElse(1);
+            final long maxId = pizzas.stream().mapToLong(Pizza::getId).max().orElse(1);
 
             this.id = maxId + 1;
 
         } catch (final Exception e){
             System.out.println("We have an issue");
-            items = new ArrayList<>();
+            pizzas = new ArrayList<>();
         }
     }
 
 
     @PreDestroy
     public void preDestroy(){
-        final Path file = Paths.get("items.txt");
+        final Path file = Paths.get("pizzas.txt");
 
         try {
-            Files.writeString(file, JacksonUtil.serialize(items), StandardCharsets.UTF_16);
+            Files.writeString(file, JacksonUtil.serialize(pizzas), StandardCharsets.UTF_16);
         } catch (final Exception e){
             System.out.println("We have an issue");
         }
     }
 
-    public List<Item> getAllItems(){
-        return new ArrayList<>(items);
+    public List<Pizza> getAllItems(){
+        return new ArrayList<>(pizzas);
     }
 
-    public Item save(Item item){
+    public Pizza save(Pizza pizza){
         ++id;
-        item.setId(id.longValue());
+        pizza.setId(id.longValue());
 
-        items.add(item);
+        pizzas.add(pizza);
 
-        return item;
+        return pizza;
     };
 
-    public Item findById(Long id){
-        return items.stream()
+    public Pizza findById(Long id){
+        return pizzas.stream()
                 .filter(e -> e.getId().equals(id))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("Item not found by id: " + id));
+                .orElseThrow(() -> new IllegalArgumentException("Pizza not found by id: " + id));
     }
 
     public void delete(Long id){
-        items = items.stream()
+        pizzas = pizzas.stream()
                 .filter(e -> !e.getId().equals(id))
                 .collect(Collectors.toList());
     }
 
-    public Item update(Item item){
-        Item saved = findById(item.getId());
+    public Pizza update(Pizza pizza){
+        Pizza saved = findById(pizza.getId());
 
-        saved.setName(item.getName());
-        saved.setPrice(item.getPrice());
-        saved.setAvailable(item.getAvailable());
+        saved.setName(pizza.getName());
+        saved.setPrice(pizza.getPrice());
+        saved.setAvailable(pizza.getAvailable());
 
         return saved;
     }

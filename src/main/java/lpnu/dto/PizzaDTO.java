@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ItemDTO {
+public class PizzaDTO {
     private Long id;
     @NotNull
     private String name;

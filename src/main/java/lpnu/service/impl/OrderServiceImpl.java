@@ -2,17 +2,14 @@ package lpnu.service.impl;
 
 import lpnu.dto.AddItemToOrderDTO;
 import lpnu.dto.OrderDTO;
-import lpnu.entity.Item;
+import lpnu.entity.Pizza;
 import lpnu.entity.Order;
 import lpnu.entity.OrderDetails;
-import lpnu.entity.User;
 import lpnu.entity.enumeration.OrderStatus;
 import lpnu.exception.ServiceException;
 import lpnu.mapper.OrderMapper;
-import lpnu.mapper.UserMapper;
-import lpnu.repository.ItemRepository;
+import lpnu.repository.PizzaRepository;
 import lpnu.repository.OrderRepository;
-import lpnu.service.ItemService;
 import lpnu.service.OrderService;
 import lpnu.util.OrderStatusUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +30,7 @@ public class OrderServiceImpl implements OrderService {
     private OrderMapper orderMapper;
 
     @Autowired
-    private ItemRepository itemRepository;
+    private PizzaRepository pizzaRepository;
 
 
     @Override
@@ -115,17 +112,17 @@ public class OrderServiceImpl implements OrderService {
             throw new ServiceException(HttpStatus.BAD_REQUEST.value(), "Order can't be changed. Order id: " + order.getId());
         }
 
-        Item item = itemRepository.findById(addDTO.getItemId());
+        Pizza pizza = pizzaRepository.findById(addDTO.getItemId());
 
 
 
         boolean isItemInOrder = order.getOrderDetails().stream()
-                .map(OrderDetails::getItem)
-                .anyMatch(e -> e.equals(item));
+                .map(OrderDetails::getPizza)
+                .anyMatch(e -> e.equals(pizza));
 
         if(isItemInOrder){
             OrderDetails savedOrderDetails = order.getOrderDetails().stream()
-                    .filter(e -> e.getItem().equals(item))
+                    .filter(e -> e.getPizza().equals(pizza))
                     .findFirst().get();
 
             savedOrderDetails.setAmount(savedOrderDetails.getAmount() + addDTO.getAmount());
@@ -133,7 +130,7 @@ public class OrderServiceImpl implements OrderService {
             orderRepository.update(order);
 
         } else {
-            OrderDetails orderDetails = new OrderDetails(item, addDTO.getAmount());
+            OrderDetails orderDetails = new OrderDetails(pizza, addDTO.getAmount());
             order.getOrderDetails().add(orderDetails);
 
             orderRepository.update(order);

@@ -1,7 +1,7 @@
 package lpnu.resource;
 
-import lpnu.dto.ItemDTO;
-import lpnu.service.ItemService;
+import lpnu.dto.PizzaDTO;
+import lpnu.service.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -10,37 +10,37 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/item")
-public class ItemResource {
+@RequestMapping("/api/v1/pizza")
+public class PizzaResource {
 
     @Autowired
-    private ItemService itemService;
+    private PizzaService pizzaService;
 
     @GetMapping
-    public List<ItemDTO> getAllItems() {
-        return itemService.getAllItems();
+    public List<PizzaDTO> getAllItems() {
+        return pizzaService.getAllItems();
     }
 
     @GetMapping("/{id}")
-    public ItemDTO findById(@PathVariable Long id) {
-        return itemService.findById(id);
+    public PizzaDTO findById(@PathVariable Long id) {
+        return pizzaService.findById(id);
     }
 
     @PostMapping
-    public ItemDTO createItem(@RequestBody @Validated ItemDTO itemDTO) {
-        return itemService.create(itemDTO);
+    public PizzaDTO createItem(@RequestBody @Validated PizzaDTO pizzaDTO) {
+        return pizzaService.create(pizzaDTO);
     }
 
 
     @PutMapping
-    public ItemDTO updateItem(@RequestBody @Validated ItemDTO itemDTO) {
-        return itemService.update(itemDTO);
+    public PizzaDTO updateItem(@RequestBody @Validated PizzaDTO pizzaDTO) {
+        return pizzaService.update(pizzaDTO);
     }
 
 
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable Long id) {
-        itemService.delete(id);
+        pizzaService.delete(id);
         return ResponseEntity.ok().build();
     }
 }
