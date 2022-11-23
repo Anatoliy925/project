@@ -1,5 +1,7 @@
 package lpnu.resource;
 
+import lpnu.dto.AddItemToOrderDTO;
+import lpnu.dto.AddToppingToPizza;
 import lpnu.dto.PizzaDTO;
 import lpnu.service.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +33,10 @@ public class PizzaResource {
         return pizzaService.create(pizzaDTO);
     }
 
+    @PostMapping("/add-ingredient")
+    public void addIngredientToPizza(@RequestBody @Validated AddToppingToPizza addDTO) {
+        pizzaService.addTopping(addDTO);
+    }
 
     @PutMapping
     public PizzaDTO updateItem(@RequestBody @Validated PizzaDTO pizzaDTO) {

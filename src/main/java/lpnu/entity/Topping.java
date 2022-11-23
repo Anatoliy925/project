@@ -3,30 +3,24 @@ package lpnu.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lpnu.entity.enumeration.Status;
 
 import java.math.BigDecimal;
-import java.util.List;
 import java.util.Objects;
-
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Pizza {
+public class Topping {
     private Long id;
     private String name;
-    private BigDecimal price;
-    private int available;
-    private Status status;
-    private List<Topping> toppings;
+    private int price;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Pizza pizza = (Pizza) o;
-        return Objects.equals(name, pizza.name) && Objects.equals(price, pizza.price);
+        Topping topping = (Topping) o;
+        return Objects.equals(name, topping.name) && Objects.equals(price, topping.price);
     }
 
     @Override
