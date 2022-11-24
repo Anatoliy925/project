@@ -16,15 +16,13 @@ public class ToppingMapper {
         return toppingDTO;
     }
 
-    public static Pizza toEntity(PizzaDTO pizzaDTO){
-        Pizza pizza = new Pizza();
+    public static Topping toEntity(ToppingDTO toppingDTO){
+        Topping topping = new Topping();
 
-        pizza.setId(pizzaDTO.getId());
-        pizza.setName(pizzaDTO.getName());
-        pizza.setPrice(pizzaDTO.getPrice());
-        pizza.setAvailable(pizzaDTO.getAvailable());
-        pizza.setStatus(pizzaDTO.getStatus());
+        topping.setId(toppingDTO.getId());
+        topping.setName(toppingDTO.getName());
+        topping.setPrice(toppingDTO.getPrice());
 
-        return pizza;
+        return topping;
     }
 }
