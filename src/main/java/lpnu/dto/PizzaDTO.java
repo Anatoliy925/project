@@ -3,11 +3,13 @@ package lpnu.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lpnu.entity.Topping;
 import lpnu.entity.enumeration.Status;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -22,6 +24,7 @@ public class PizzaDTO {
     @NotNull
     @Min(value = 0, message = "Available should be greater than 0")
     private int available;
+    private List<Topping> toppings;
     private Status status;
 
 }
