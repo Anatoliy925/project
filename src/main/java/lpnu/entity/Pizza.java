@@ -18,7 +18,6 @@ public class Pizza {
     private String name;
     private BigDecimal price;
     private int available;
-    private Status status;
     private List<Topping> toppings;
 
     @Override

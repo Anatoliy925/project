@@ -43,7 +43,6 @@ public class PizzaServiceImpl implements PizzaService {
     public PizzaDTO create(PizzaDTO pizzaDTO) {
         Pizza pizza = PizzaMapper.toEntity(pizzaDTO);
         pizza.setToppings(new ArrayList<>());
-        pizza.setStatus(Status.ACTIVE);
 
         pizzaRepository.save(pizza);
 

@@ -37,6 +37,10 @@ public class OrderResource {
         orderService.addItemToOrder(addDTO);
     }
 
+    @PatchMapping("/checkout")
+    public void closeOrder(@RequestBody @Validated OrderDTO orderDTO){
+        orderService.closeOrder(orderDTO.getId());
+    }
 
 //    @PutMapping
 //    public OrderDTO updateOrder(@RequestBody @Validated OrderDTO orderDTO) {

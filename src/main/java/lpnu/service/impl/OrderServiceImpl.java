@@ -77,11 +77,6 @@ public class OrderServiceImpl implements OrderService {
     public void closeOrder(Long orderId) {
         Order order = orderRepository.findById(orderId);
 
-        if (!OrderStatusUtil.canBeClosed(order)) {
-            throw new ServiceException(HttpStatus.BAD_REQUEST.value(),
-                    "Order can't be moved to CLOSED state. Current state of order is: " + order.getOrderStatus());
-        }
-
         order.setOrderStatus(OrderStatus.CLOSED);
         order.setOrderDateTime(LocalDateTime.now());
 
@@ -141,6 +136,7 @@ public class OrderServiceImpl implements OrderService {
     public void delete(Long id) {
         orderRepository.delete(id);
     }
+
 
 
     //    @Override

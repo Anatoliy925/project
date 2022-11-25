@@ -25,6 +25,5 @@ public class PizzaDTO {
     @Min(value = 0, message = "Available should be greater than 0")
     private int available;
     private List<Topping> toppings;
-    private Status status;
 
 }
